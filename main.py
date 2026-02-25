@@ -1,3 +1,4 @@
+import os
 import google.generativeai as genai
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
@@ -20,10 +21,9 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
-# 3. SETUP GEMINI (Paste your NEW key here!)
-genai.configure(api_key="AIzaSyCcSFXiQR9_0GWCMntoj9uAh1xk0Nu0z-0") # <--- ENSURE THIS KEY IS VALID
-
+# 3. SETUP GEMINI (Securely fetching from Render!)
+my_secret_key = os.getenv("GEMINI_API_KEY")
+genai.configure(api_key=my_secret_key)
 # 4. USE THE WORKING MODEL
 model = genai.GenerativeModel('gemini-2.5-flash')
 
