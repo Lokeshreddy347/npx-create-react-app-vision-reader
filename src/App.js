@@ -75,7 +75,7 @@ function App() {
     try {
         setStatusMessage("🔊 Downloading Audio...");
         // 👇 Ngrok URL
-        const backendUrl = "https://strophically-unboasting-laverne.ngrok-free.dev/speak";
+        const backendUrl = "https://strophically-https://translamate-ai.onrender.com-laverne.ngrok-free.dev/speak";
         
         const response = await fetch(backendUrl, {
             method: "POST",
@@ -110,7 +110,7 @@ function App() {
     setStatusMessage("Translating...");
     try {
       // 👇 Ngrok URL
-     const backendUrl = "https://strophically-unboasting-laverne.ngrok-free.dev/translate";
+     const backendUrl = "https://https://translamate-ai.onrender.com-unboasting-laverne.ngrok-free.dev/translate";
       
       const response = await fetch(backendUrl, {
         method: "POST",
