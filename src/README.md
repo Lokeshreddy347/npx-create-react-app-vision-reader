@@ -85,3 +85,108 @@ npm install
 
 # Start the development server
 npm start
+
+
+
+
+# 👁️ Vision Reader (AI-Powered Accessibility Tool)
+
+![Status](https://img.shields.io/badge/Status-Active-success)
+![Tech](https://img.shields.io/badge/Stack-React_|_FastAPI_|_Gemini-blue)
+![AI](https://img.shields.io/badge/AI-Google_Gemini_2.5_Flash-orange)
+
+**Vision Reader** is a Progressive Web App (PWA) designed to bridge the literacy and language gap for Indian users. It turns any smartphone into an intelligent reading assistant for the visually impaired and elderly.
+
+By combining **On-Device OCR** with **Generative AI** and **Server-Side Audio Synthesis**, Vision Reader scans physical documents, translates them into 10+ Indian languages, and reads them aloud with high-fidelity native accents.
+
+---
+
+## 🚀 Key Features
+
+* **📷 Instant OCR:** Extracts text from camera images or PDFs using Tesseract.js (WebAssembly).
+* **🧠 GenAI Translation:** Powered by **Google Gemini 2.5 Flash** for context-aware translations in 10+ languages (Telugu, Hindi, Tamil, etc.).
+* **🔊 Server-Side Neural Audio:** Bypasses limited browser voices by streaming high-quality MP3 audio generated via Python (gTTS) on the edge server.
+* **🗃️ History Drawer:** Automatically saves the last 5 scans to LocalStorage for offline retrieval.
+* **🎨 "Living" HUD Interface:** High-contrast, futuristic UI designed for accessibility, featuring laser scanning animations and audio wave visualizers.
+* **🇮🇳 Native Language Grid:** Displays language options in their native script (e.g., "తెలుగు" instead of "Telugu") to aid illiterate users.
+
+---
+
+## 🛠️ Tech Stack
+
+### **Frontend (Client)**
+* **Framework:** React.js
+* **OCR Engine:** Tesseract.js (On-device processing)
+* **PDF Processing:** PDF.js
+* **State Management:** React Hooks + LocalStorage
+* **Styling:** CSS-in-JS, CSS Animations
+
+### **Backend (Server)**
+* **Framework:** Python FastAPI
+* **Server:** Uvicorn (ASGI)
+* **API Security:** CORSMiddleware (Local Network Access)
+* **Audio Processing:** IO Byte Streams (In-memory MP3 generation)
+
+### **AI & APIs**
+* **LLM:** Google Gemini 2.5 Flash (via `google-genai` SDK)
+* **TTS:** gTTS (Google Text-to-Speech)
+* **Computer Vision:** LSTM-based OCR models
+
+---
+
+## 🏗️ Architecture
+
+The app follows a **Hybrid Client-Server Architecture**:
+
+```mermaid
+graph TD
+    A[Mobile Client (React)] -->|1. Image Upload| B[Tesseract OCR (Browser)]
+    B -->|2. Extracted Text| A
+    A -->|3. POST /translate| C[FastAPI Server (Python)]
+    C -->|4. Prompt Engineering| D[Google Gemini 2.5 Flash]
+    D -->|5. Translated Text| C
+    C -->|6. JSON Response| A
+    A -->|7. POST /speak| C
+    C -->|8. Generate MP3| E[gTTS Engine]
+    E -->|9. Audio Stream (Blob)| A
+    A -->|10. Play Audio| F[User Speaker]
+
+
+    Here is how to kill the old process and start fresh.
+
+🔪 Step 1: Kill the Zombie Ngrok
+Since you might have closed the window but the process is still alive, let's force-quit it.
+
+Open your Terminal (PowerShell).
+
+Run this command to kill all ngrok processes:
+
+PowerShell
+taskkill /f /im ngrok.exe
+(If it says "SUCCESS", good. If it says "not found", that's also fine.)
+
+🚀 Step 2: Restart Properly
+Now that the "zombie" is dead, start it again.
+
+Make sure your ngrok.yml file is saved and looks correct (with the backend having the hostname and frontend having NO hostname).
+
+Run the start command:
+
+PowerShell
+ngrok start --all --config=ngrok.yml
+You should now see the two green "online" lines.
+
+Copy the SECOND link (the random one pointing to localhost:3000).
+
+Share that link with your friends.
+
+⚠️ Final Checklist (Before you share)
+For the link to work for your friends, you must keep these 3 things running on your laptop:
+
+✅ Python Terminal: python main.py (The Brain)
+
+✅ React Terminal: npm start (The Face)
+
+✅ Ngrok Terminal: ngrok start --all --config=ngrok.yml (The Tunnel)
+
+If you close your laptop or any of these windows, the link will die.
