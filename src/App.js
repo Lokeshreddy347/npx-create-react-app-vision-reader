@@ -75,8 +75,7 @@ function App() {
     try {
         setStatusMessage("🔊 Downloading Audio...");
         // 👇 Ngrok URL
-        const backendUrl = "https://strophically-https://translamate-ai.onrender.com-laverne.ngrok-free.dev/speak";
-        
+const backendUrl = "https://translamate-ai.onrender.com/speak";        
         const response = await fetch(backendUrl, {
             method: "POST",
             headers: { 
@@ -110,16 +109,18 @@ function App() {
     setStatusMessage("Translating...");
     try {
       // 👇 Ngrok URL
-     const backendUrl = "https://https://translamate-ai.onrender.com-unboasting-laverne.ngrok-free.dev/translate";
-      
-      const response = await fetch(backendUrl, {
-        method: "POST",
-        headers: { 
-            "Content-Type": "application/json",
-            "ngrok-skip-browser-warning": "true" // 👈 CRITICAL FIX
-        },
-        body: JSON.stringify({ text: originalText, dest: targetLang, mode: mode })
-      });
+      const backendUrl = "https://translamate-ai.onrender.com/translate";      
+      const response = await fetch("https://translamate-ai.onrender.com/translate", {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json"
+  },
+  body: JSON.stringify({
+    text: originalText,
+    dest: targetLang,
+    mode: mode
+  })
+}); 
       
       const data = await response.json();
       
